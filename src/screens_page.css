@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+.screen-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.screen {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background: #f9f9f9;
+}
+.screen h2 {
+    margin: 0 0 10px;
+    font-size: 1rem;
+}
+.screen canvas {
+    display: block;
+    width: 200px;
+    height: 200px;
+}

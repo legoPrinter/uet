@@ -1,16 +1,15 @@
 // Importing the wasm_bindgen crate. Used for Rust - Javascript interaction in a WebAssembly context.
 use wasm_bindgen::prelude::*;
 
+const WIDTH: u32 = 200;
+const HEIGHT: u32 = 200;
+
 #[wasm_bindgen]
-pub fn message(length: u32) -> String {
-    let chars = "abcdefghijklmnopqrstuvwxyz";
-    let mut result = String::new();
-    let mut i: usize = length as usize % 100;
-    for _ in 0..length-1 {
-        i = (i * 2) - 1;
-        if i > 10000 {i = length as usize % 100}
-        result.push(chars.chars().nth(i % chars.len()).unwrap());
+pub fn render_frame() -> Vec<u8> {
+    let mut buffer = [0u8; (WIDTH * HEIGHT * 4) as usize];
+    let color = [255, 0, 255, 255];
+    for (i, pixel) in buffer.iter_mut().enumerate() {
+        *pixel = color[i % 4];
     }
-    result.push('!');
-    return result;
+    buffer.to_vec()
 }

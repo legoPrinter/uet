@@ -1,5 +1,8 @@
 // Importing the wasm_bindgen crate. Used for Rust - Javascript interaction in a WebAssembly context.
 use wasm_bindgen::prelude::*;
+use web_sys::js_sys::{Function};
+
+mod screen;
 
 fn log(message: &str) {
     web_sys::console::log_1(&message.into());
@@ -7,6 +10,7 @@ fn log(message: &str) {
 
 #[wasm_bindgen]
 pub fn start_rust_program() {
+    /*
     log("Getting window");
     let window = match web_sys::window() {
         Some(window) => window,
@@ -23,6 +27,9 @@ pub fn start_rust_program() {
             return;
         }
     };
+    */
+    let window = web_sys::window().unwrap();
+    let document = window.document().unwrap();
     log("Getting canvas");
     let canvas = match document.query_selector("canvas") {
         Ok(canvas) => match canvas {
@@ -61,7 +68,27 @@ pub fn start_rust_program() {
             return;
         }
     };
-    log("Drawing something on canvas");
-    ctx.set_fill_style_str("blue");
-    ctx.fill_rect(10.0, 10.0, 100.0, 100.0);
+
+    // define variables
+    
+    // duration of period in milliseconds
+    let speed1: u32 = 4000;
+    let speed2: u32 = 5000;
+
+    // frame frequency in Hz
+    let fps: u32 = 30;
+
+    let mut frame: u32 = 0;
+
+    // create the callback and interval
+    let cb: ScopedClosure<'static, dyn FnMut() -> ()> = Closure::new(move || {
+        frame += 1;
+        let dt = frame as f64 / fps as f64 * 1000.0; // delta time in milliseconds
+
+        let input1 = (((dt / speed1 as f64) % 1.0) * 2.0 * 3.14159).sin() / 2.0 + 0.5;
+        let input2 = (((dt / speed2 as f64) % 1.0) * 2.0 * 3.14159).sin() / 2.0 + 0.5;
+
+        screen::screen1(&ctx, input1, input2);
+    });
+    window.set_interval_with_callback_and_timeout_and_arguments_0(&Function::from_closure(cb), 1000 / fps as i32).unwrap();
 }

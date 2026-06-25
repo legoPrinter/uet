@@ -7,14 +7,14 @@ mod common;
 
 use std::f64::consts::PI;
 
-pub fn draw_frame(contexts: &[context], frame: u32, dt: f64) -> Result<(), String> {
+pub fn draw_frame(contexts: &[context], _frame: u32, dt: f64) -> Result<(), String> {
     if contexts.len() < 3 {
         return Err("Not enough contexts provided, expected 3".into());
     }
 
     // duration of period in milliseconds
-    let speed1: u32 = 4000;
-    let speed2: u32 = 5000;
+    let speed1: u32 = 8000;
+    let speed2: u32 = 10000;
     
     let input1 = (((dt / speed1 as f64) % 1.0) * 2.0 * PI).sin() / 2.0 + 0.5;
     let input2 = (((dt / speed2 as f64) % 1.0) * 2.0 * PI).sin() / 2.0 + 0.5;

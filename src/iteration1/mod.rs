@@ -16,8 +16,8 @@ pub fn draw_frame(contexts: &[context], _frame: u32, dt: f64) -> Result<(), Stri
     let speed1: u32 = 8000;
     let speed2: u32 = 10000;
     
-    let input1 = (((dt / speed1 as f64) % 1.0) * 2.0 * PI).sin() / 2.0 + 0.5;
-    let input2 = (((dt / speed2 as f64) % 1.0) * 2.0 * PI).sin() / 2.0 + 0.5;
+    let input1 = (((dt / speed1 as f64) % 1.0 - 0.25) * 2.0 * PI).sin() / 2.0 + 0.5;
+    let input2 = (((dt / speed2 as f64) % 1.0 - 0.25) * 2.0 * PI).sin() / 2.0 + 0.5;
 
     for i in 0..3 {
         let context = &contexts[i];

@@ -1,0 +1,3 @@
+# Unrelatable Experience Theory
+
+This simulation is intended to make it easier to understand my speculation about the way people experience the world. The assumption at the foundation of this whole theory is that behind one's senses, the universe is unfathomable as it truly is. Developing this point forward, I think that every individual experiences an entirely different phenomena of life than any other, contrary to common sense; growing up, each individual had to find their own way to abstract nerve inputs, to be able to make decisions, and each person has found a different pattern and system they rely on.
